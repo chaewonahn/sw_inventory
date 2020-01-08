@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>세운 인벤토리</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1,user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="js/graph.js" type="text/javascript" language="javascript"></script>
+
+  <!-- One Page Module Specific Stylesheet -->
+  <link rel="stylesheet" href="static/css/onepage.css" type="text/css" />
+  <!-- / -->
+
+  <link rel="stylesheet" href="static/css/dark.css" type="text/css" />
+  <link rel="stylesheet" href="static/css/font-icons.css" type="text/css" />
+  <link rel="stylesheet" href="static/css/et-line.css" type="text/css" />
+  <link rel="stylesheet" href="static/css/animate.css" type="text/css" />
+  <link rel="stylesheet" href="static/css/magnific-popup.css" type="text/css" />
+
+  <link rel="stylesheet" href="static/css/fonts.css" type="text/css" />
+  <link rel="stylesheet" href="/static/css/components/bs-select.css" type="text/css" />
+  <link rel="stylesheet" href="/static/css/responsive.css" type="text/css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- One Page Module Specific Stylesheet -->
+  <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500,700|Source+Sans+Pro&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" />
+
+  <style>
+
+  g.texts.zoomable.label-txt {
+      display:inline;
+      background-color: #fff;
+      z-index: 100;
+      box-shadow: 0 0 0 10px #fff;
+  }
+
+  #menu {
+    position: absolute;
+    bottom: 2em;
+    left: 2em;
+  }
+
+  path {
+    fill-opacity: 0.8;
+    stroke-opacity: 0;
+  }
+
+  .nodes circle {
+    stroke: #fff;
+    stroke-width: 1.5px;
+  }
+
+  .c.cf {
+      font-family: Noto Sans KR;
+      font-weight: 400;
+      font-size: 0.7rem;
+  }
+
+  #attributepane {
+    display: block;
+    display: none;
+    position:absolute;
+    height:auto;
+    bottom:50px;
+    top:50px;
+    right:50px;
+    width: 250px;
+    background-color: #fff;
+    margin: 0;
+    word-wrap: break-word;
+    -webkit-transition: all 0.4s ease 0s;
+    -o-transition: all 0.4s ease 0s;
+    transition: all 0.4s ease 0s;
+    background-color:rgba(255, 255, 255,0.8);
+    border: 1px solid black;
+    padding: 0px 18px 0px 18px;
+    z-index: 1;
+  }
+
+  #attributepane-left {
+    display: block;
+    position:absolute;
+    height:25%;
+    bottom:50px;
+    left:50px;
+    width: 220px;
+    background-color: #fff;
+    margin: 0;
+    word-wrap: break-word;
+  /*  -webkit-transition: all 0.4s ease 0s;
+    -o-transition: all 0.4s ease 0s;
+    transition: all 0.4s ease 0s;*/
+    background-color:rgba(255, 255, 255,0.8);
+    border: 0px solid black;
+    padding: 18px;
+    z-index: 1;
+  }
+
+  #attributepane .text {
+    height:100%;
+  }
+
+  #attributepane .headertext {
+    color: #000;
+    margin-bottom: 0px;
+    height: 14px;
+    border-bottom: 0px solid #999;
+    padding: 0px 0 10px 0;
+    font-size:16px;
+    font-weight:bold;
+  }
+
+  #attributepane .returntext em {
+    background-repeat: no-repeat;
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-position: -91px -13px;
+    float: left;
+  }
+
+  #attributepane .returntext span {
+    padding-left: 5px;
+    display: block;
+  }
+
+  #attributepane .close {
+    padding-left: 14px;
+    margin-top: 10px;
+  }
+
+  #attributepane .close .c {
+    border-top: 2px solid #999;
+    padding: 10px 0 14px 0;
+  }
+
+  #attributepane .close em {
+  background-repeat: no-repeat;
+  background-position: -11px -13px;
+  display: block;
+  width: 24px;
+  height: 16px;
+  float: left;
+  }
+
+  #attributepane .close span {
+  display: block;
+  width: 151px;
+  float: left;
+  }
+
+  #attributepane .nodeattributes {
+    display:block;
+    height:85%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  /*	border-bottom:1px solid #999; */
+  }
+
+  #attributepane #name {
+    font-family: Noto Sans KR;
+    font-size: 1.2rem;
+    padding-top: 7%;
+    padding-bottom: 14%;
+    font-weight: 500;
+  }
+
+  #attributepane #data {
+    color:#808080;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.7rem;
+  /*  padding-left: 20%; */
+  }
+
+  #attributepane #data .plus {
+    background-repeat: no-repeat;
+    background-position: -171px -122px;
+    width: 22px;
+    height: 20px;
+    float: left;
+    display: block;
+  }
+
+  #attributepane #link {
+    padding: 0 0 0 4px;
+    line-height: 1.4;
+    font-weight: 200;
+    font-size: 0.8rem;
+  }
+
+  #attributepane #link li {
+    padding-top: 2px;
+    cursor:pointer;
+  }
+
+  #attributepane #p {
+    padding-top: 20%;
+    font-weight: bold;
+    font-size: 0.8rem;
+  }
+
+  .left-close {
+    /*background-image: url('../images/exit.svg');*/
+    margin-left:-10px;
+    z-index:99999;
+    cursor: pointer;
+    padding-left:31px;
+    line-height:36px;
+    background-repeat: no-repeat;
+    /*margin-bottom:25px;*/
+    font-weight: bold;
+    font-size:10px;
+  }
+  </style>
+</head>
+
+<body>
+   <div id="attributepane-left">
+    <div class="col">
+       <div id="title"></div>
+      <div class="b1">
+        <form>
+          <div id="searchwrapper" class="cf">
+            <input type="text" name="search" placeholder="취급 상품 혹은 상호명을 검색하세요." class="formcongrol"/>
+            <div class="state"></div>
+            <div class="results"></div>
+          </div>
+        </form>
+      </div>
+     <div class ="btn-container">
+        <a class="btn c cf" id="close" href="#"> 전체 화면으로 돌아가기</a>
+        <br><br><button type = "button" class="btn btn-light filter-btn" value="1" id="firstbike" onClick="alert('button is clicked')">FIRST BIKE</button>
+        <br><br><button class = "btn btn-light " onClick="projbtn(this.id, this.innerHTML)" id="usblight">황동USB조명</button>
+        <br><br><button class = "btn btn-light" onClick="projbtn(this.id, this.innerHTML)" id="luckydraw" disabled>행운번호 추첨기</button>
+      </div>
+    </div>
+    <div id="information">
+    </div>
+  </div>-
+
+  <svg width="960" height="600">
+    <filter x="0" y="0" width="1" height="1" id="addbackground">
+       <feFlood flood-color="rgba(255,255,255,0.75)"/>
+       <feComposite in="SourceGraphic"/>
+    </filter>
+  </svg>
+
+  <div id="attributepane">
+    <div class="text">
+    <div class="headertext">
+  </div>
+    <div class="nodeattributes">
+      <div id="name"></div>
+  	  <div id="data"></div>
+      <div id="p">Connections</div>
+      <a id= "link"></a>
+    </div>
+    <div title="Close" class="left-close returntext">
+      <a class="btn c cf" id="close" href="#"> <i class="icon-remove"></i> 전체 화면으로 돌아가기</a>
+    </div>
+  	</div>
+  </div>
+</body>
+</html>
