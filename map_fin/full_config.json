@@ -1,0 +1,53 @@
+{
+  "type": "network",
+  "version": "1.0",
+  "data": "full_data.json",
+  "logo": {
+    "file": "",
+    "link": "",
+    "text": "ca"
+  },
+  "text": {
+    "more": "and figuring out what I need to do",
+    "intro": "testing to see what this does",
+    "title": "세운 인벤토리"
+  },
+  "legend": {
+    "edgeLabel": "relationship",
+    "colorLabel": "class",
+    "nodeLabel": "shop/product/process"
+  },
+  "features": {
+    "search": true,
+    "groupSelectorAttribute": "group_name",
+    "hoverBehavior": "dim"
+  },
+  "informationPanel": {
+    "groupByEdgeDirection": false,
+    "imageAttribute": false
+  },
+  "sigma": {
+    "drawingProperties": {
+      "defaultEdgeType": "curve",
+      "defaultHoverLabelBGColor": "#002147",
+      "defaultLabelBGColor": "#ddd",
+      "activeFontStyle": "bold",
+      "defaultLabelColor": "#000",
+      "labelThreshold": 10,
+      "defaultLabelHoverColor": "#fff",
+      "fontStyle": "bold",
+      "hoverFontStyle": "bold",
+      "defaultLabelSize": 14
+    },
+    "graphProperties": {
+      "maxEdgeSize": 0.5,
+      "minEdgeSize": 0.2,
+      "minNodeSize": 1,
+      "maxNodeSize": 7
+    },
+    "mouseProperties": {
+      "maxRatio": 20,
+      "minRatio": 0.75
+    }
+  }
+}
